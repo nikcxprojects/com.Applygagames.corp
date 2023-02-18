@@ -78,6 +78,7 @@ public class GameManager : MonoBehaviour
     {
         StartCoroutine(nameof(Spawning));
 
+        result.SetActive(false);
         menu.SetActive(false);
         game.SetActive(true);
 
