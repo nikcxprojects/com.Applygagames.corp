@@ -13,14 +13,14 @@ public class LeaderboardManager : MonoBehaviour
         int[] scores = new int[records.Length];
         for(int i = 0; i < scores.Length; i++)
         {
-            scores[i] = Random.Range(250, 800);
+            scores[i] = Random.Range(2000, 6000);
         }
 
         var sortedScores = scores.OrderByDescending(i => i).ToArray();
         for(int i = 0; i < records.Length; i++)
         {
-            Text leader = records[i].GetChild(0).GetComponent<Text>();
-            leader.text = $"{sortedScores[i]}";
+            Text leader = records[i].GetComponent<Text>();
+            leader.text = $"{i+1}.{sortedScores[i]}";
         }
     }
 }

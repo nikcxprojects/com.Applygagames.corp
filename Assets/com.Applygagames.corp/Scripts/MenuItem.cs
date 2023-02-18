@@ -26,7 +26,8 @@ public class MenuItem : MonoBehaviour
         IsEnable = false;
         IsDestinated = false;
 
-        transform.localPosition += Vector3.down * 2000;
+        float xOffset = transform.GetSiblingIndex() % 2 == 0 ? 2000 : -2000;
+        transform.localPosition += Vector3.right * xOffset;
 
         StartCoroutine(nameof(Delay));
     }
