@@ -1,19 +1,40 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    private int health;
+    private int score;
+
     [SerializeField] GameObject menu;
     [SerializeField] GameObject rules;
     [SerializeField] GameObject record;
     [SerializeField] GameObject game;
     [SerializeField] GameObject result;
 
+    [Space(10)]
+    [SerializeField] Text scoreText;
+    [SerializeField] Text finalScoreText;
+
     private void Awake()
     {
         Ball.OnBallPressed += (IsEnemy) =>
         {
-            Debug.Log(IsEnemy);
+            if(IsEnemy)
+            {
+                health--;
+                if(health <=0)
+                {
+                    GameOver();
+                    return;
+                }
+            }
+            else
+            {
+                score += Random.Range(10, 25);
+                scoreText.text = finalScoreText.text = $"SCORE {score}";
+            }
         };
     }
 
@@ -27,6 +48,18 @@ public class GameManager : MonoBehaviour
         result.SetActive(false);
 
         menu.SetActive(true);
+    }
+
+    private void GameOver()
+    {
+        StopCoroutine(nameof(Spawning));
+        foreach (Ball b in FindObjectsOfType<Ball>())
+        {
+            Destroy(b.gameObject);
+        }
+
+        game.SetActive(false);
+        result.SetActive(true);
     }
 
     public void OpenRules()
@@ -44,16 +77,23 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(nameof(Spawning));
+
+        menu.SetActive(false);
+        game.SetActive(true);
+
+        score = 0;
+        health = 3;
+
+        scoreText.text = finalScoreText.text = $"SCORE {score}";
     }
 
     public void OpenMenu()
     {
-        foreach(Ball b in FindObjectsOfType<Ball>())
+        StopCoroutine(nameof(Spawning));
+        foreach (Ball b in FindObjectsOfType<Ball>())
         {
             Destroy(b.gameObject);
         }
-
-        StopCoroutine(nameof(Spawning));
 
         result.SetActive(false);
         rules.SetActive(false);
@@ -70,12 +110,12 @@ public class GameManager : MonoBehaviour
     private IEnumerator Spawning()
     {
         Transform parent = GameObject.Find("Environment").transform;
-        GameObject[] balls = Resources.LoadAll<GameObject>("");
+        GameObject[] balls = Resources.LoadAll<GameObject>("balls");
 
         while(true)
         {
             Instantiate(balls[Random.Range(0, balls.Length)], parent);
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.0f));
+            yield return new WaitForSeconds(Random.Range(1.0f, 1.5f));
         }
     }
 }
