@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "8068366992",
+    "project_id": "winasap-39099",
+    "storage_bucket": "winasap-39099.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:8068366992:android:490cd0f53ba559b1b00e15",
+        "android_client_info": {
+          "package_name": "com.Applygagames.corp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "8068366992-1lmqd8267oc9d14ftadbi3dlqedvqcmj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_sHpNptOk3c1FuzIMDGq62qHgiq6QoN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "8068366992-1lmqd8267oc9d14ftadbi3dlqedvqcmj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
